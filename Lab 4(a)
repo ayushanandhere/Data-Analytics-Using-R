@@ -1,3 +1,6 @@
+# Name - AYUSH ANAND
+# USN - 1MS21CI008
+
 calculate_fine <- function(days_overdue) {
   if (days_overdue <= 7) {
     fine <- 0
