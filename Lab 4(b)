@@ -1,3 +1,6 @@
+# Name - AYUSH ANAND
+# USN - 1MS21CI008
+
 # Initialize arrays for inventory items and quantities
 inventory_items <- character(0)
 inventory_qty <- numeric(0)
