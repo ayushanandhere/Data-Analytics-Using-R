@@ -1,0 +1,56 @@
+Lab Exercise 7: Customer Purchase Analysis for E-commerce Company
+___________________________________________________________________________________
+You are a data analyst working for an e-commerce company that specializes in selling a variety
+of products online. The company aims to analyze customer purchase data comprehensively to
+gain insights into customer behaviour and spending patterns. Your goal is to develop a R
+program that performs an in-depth analysis of customer purchase data. You will calculate
+various statistical measures and generate visualizations to understand the distribution of
+purchase amounts among customers.
+Note: Load the necessary libraries, including the dplyr and ggplot2 packages. Given the
+example customer purchase data provided below, create a data frame named purchase_data
+with two columns: CustomerID and PurchaseAmount.
+Calculate and display the following statistical measures:
+i. Mean (average) purchase amount
+ii. Median purchase amount
+iii. Standard deviation of purchase amounts
+iv. 1st quartile (25th percentile) of purchase amounts
+v. 3rd quartile (75th percentile) of purchase amounts
+Create a histogram to visualize the distribution of purchase amounts using the ggplot2 package.
+Display the histogram with appropriate labels and titles.
+Example Customer Purchase Data:
+
+Modifications:
+1. Increase the number of samples in the in the purchase data set and
+execute.
+2. Generate histogram with different number of bins.
+3. Apply different colors for the histogram.
+__________________________________________________________________________________
+
+# Load required libraries
+library(dplyr)
+library(ggplot2)
+
+# Example customer purchase data with more samples
+purchase_data <- data.frame(
+  CustomerID = c(101, 102, 103, 104, 105, 106, 107, 108, 109, 110),
+  PurchaseAmount = c(150, 200, 120, 300, 80, 180, 250, 130, 220, 170)
+)
+
+# calculate statistical measures
+mean_purchase <- mean(purchase_data$PurchaseAmount)
+median_purchase <- median(purchase_data$PurchaseAmount)
+sd_purchase <- sd(purchase_data$PurchaseAmount)
+q1_purchase <- quantile(purchase_data$PurchaseAmount, probs = 0.25)
+q3_purchase <- quantile(purchase_data$PurchaseAmount, probs = 0.75)
+
+# Display results
+cat("Mean Purchase Amount:", mean_purchase, "\n")
+cat("Median Purchase Amount:", median_purchase, "\n")
+cat("Standard Deviation of Purchase Amounts:", sd_purchase, "\n")
+cat("1st Quartile of Purchase Amounts:", q1_purchase, "\n")
+cat("3rd Quartile of Purchase Amounts:", q3_purchase, "\n")
+
+# Create a histogram with different number of bins and colors
+ggplot(purchase_data, aes(x = PurchaseAmount)) +
+  geom_histogram(binwidth = 30, fill = "green", color = "black") +
+  labs(title = "Distribution of Purchase Amounts", x = "Purchase Amount", y = "Frequency")
