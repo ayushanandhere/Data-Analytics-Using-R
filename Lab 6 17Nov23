@@ -1,0 +1,53 @@
+
+Lab Exercise 6: R functions for statistical analysis
+------------------------------------------------------------------
+You are a data analyst at a retail company that sells products online. The company is interested
+in predicting sales for the upcoming months to better manage inventory and plan marketing
+strategies. As part of your role, you need to develop a program that utilizes time series analysis
+to forecast sales based on a historical sales dataset.
+Write an R program to forecast sales for the next three months using time series analysis
+techniques. The program should perform the following steps:
+i. Load the required libraries, including the forecast package.
+ii. Create a data frame with two columns: Month and Sales. The Month column should contain a
+sequence of dates from January 2023 to June 2023 (inclusive), and the Sales column should
+contain the corresponding sales amounts (12000, 15000, 18000, 16000, 20000, 22000).
+iii. Convert the sales data into a time series object with a monthly frequency.
+iv. Fit an ARIMA (AutoRegressive Integrated Moving Average) model to the sales time series
+using the auto.arima() function.
+v. Forecast sales for the next three months using the fitted ARIMA model and the forecast()
+function.
+vi. Display the forecasted sales results, including point forecasts and prediction intervals.
+
+Modification: Modify the input data to 12 months sales data. Fit ARIMA model and forecast 4
+future values. Plot the forecast.
+
+_________________________________________________________________________________________________
+
+# Load required libraries
+library(forecast)
+
+# Create a data frame with Month and sales columns for 12 months
+sales_data <- data.frame(
+  Month = seq(as.Date("2023-01-01"), as.Date("2023-12-01"), by = "months"),
+  Sales = c(12000, 15000, 18000, 16000, 20000, 22000, 25000, 28000, 30000, 32000, 35000, 38000)
+)
+
+print(sales_data)
+print(sales_data$Month)
+print(sales_data$Sales)
+
+# Convert to time series data/object for use with R functions for time series data analysis (Function: ts())
+# Frequency 12 makes it a monthly time series (Jan-Dec due to 12 values of sales).
+sales_ts <- ts(sales_data$Sales, frequency = 12)
+
+print(sales_ts)
+
+# Fit ARIMA model (From forecast package)
+arima_model <- auto.arima(sales_ts)
+
+# Forecast sales for the next 4 months
+forecast_result <- forecast(arima_model, h = 4)
+
+# Display forecast results
+print(forecast_result)
+plot(forecast_result)
