@@ -1,0 +1,72 @@
+# Name - AYUSH ANAND
+# USN - 1MS21CI008
+
+# Load necessary libraries
+library(MASS)
+
+# Function to take user input for matrix
+get_matrix_input <- function() {
+  nrow <- as.integer(readline(prompt = "Enter the number of rows for the matrix: "))
+  ncol <- as.integer(readline(prompt = "Enter the number of columns for the matrix: "))
+  
+  matrix_elements <- matrix(NA, nrow = nrow, ncol = ncol)
+  
+  cat("Enter matrix elements row-wise:\n")
+  for (i in 1:nrow) {
+    for (j in 1:ncol) {
+      prompt <- paste("Element for row", i, "and column", j, ": ")
+      matrix_elements[i, j] <- as.numeric(readline(prompt = prompt))
+    }
+  }
+  
+  return(matrix_elements)
+}
+
+# Task i: Create two matrices of the same dimension (A & B)
+cat("Enter details for Matrix A:\n")
+matrix_A <- get_matrix_input()
+
+cat("\nEnter details for Matrix B:\n")
+matrix_B <- get_matrix_input()
+
+# Task ii: Add the two matrices and display the result
+result_addition <- matrix_A + matrix_B
+cat("\nMatrix Addition Result:\n", result_addition, "\n\n")
+
+# Task iii: Scale a matrix by multiplying with a scalar and display result
+scalar <- as.numeric(readline(prompt = "Enter a scalar for matrix multiplication: "))
+scaled_matrix <- scalar * matrix_A
+cat("\nScalar Multiplication Result:\n", scaled_matrix, "\n\n")
+
+# Task iv: Find transpose of the matrix and display
+transpose_matrix_A <- t(matrix_A)
+cat("Transpose of Matrix A:\n", transpose_matrix_A, "\n\n")
+
+# Task v: Hadamard product(Element-wise product) of the two matrices
+hadamard_product <- matrix_A * matrix_B
+cat("\nHadamard Product Result:\n", hadamard_product, "\n\n")
+
+# Task vi: Matrix multiplication
+matrix_multiply <- matrix_A %*% matrix_B
+cat("\nMatrix Multiplication Result:\n", matrix_multiply, "\n\n")
+
+# Task vii: Generate statistics - Sum, mean, and standard deviation of elements of A
+sum_A <- sum(matrix_A)
+mean_A <- mean(matrix_A)
+sd_A <- sd(matrix_A)
+cat("Statistics for Matrix A:\n")
+cat("Sum:", sum_A, "\nMean:", mean_A, "\nStandard Deviation:", sd_A, "\n\n")
+
+# Task viii: Plot a heatmap of the matrix A with modified color gradient
+heatmap(matrix_A, col = rev(heat.colors(10)), main = "Heatmap of Matrix A", xlab = "Columns", ylab = "Rows")
+
+# Task ix: Plot the bar plot to compare sums of the rows of a matrix A
+barplot(rowSums(matrix_A), main = "Bar Plot of Row Sums for Matrix A", xlab = "Rows", ylab = "Sum")
+
+# Modifications:
+
+# Modification 1: Modify the color gradient of the heatmap
+heatmap(matrix_A, col = rev(rainbow(10)), main = "Modified Heatmap of Matrix A", xlab = "Columns", ylab = "Rows")
+
+# Modification 2: Generate a barplot of column sums of matrix B with appropriate labels
+barplot(colSums(matrix_B), main = "Bar Plot of Column Sums for Matrix B", xlab = "Columns", ylab = "Sum")
