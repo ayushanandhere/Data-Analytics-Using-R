@@ -1,0 +1,89 @@
+You are a data analyst tasked with performing an Exploratory Data Analysis (EDA) on the Indian Premier League (IPL) dataset. The IPL dataset contains information about various IPL matches, including match dates, teams, venues, outcomes, and performance metrics. Your objective is to gain insights into the dataset by conducting an in-depth analysis using R programming.
+Dataset Description:
+Match_ID: Unique identifier for each match.
+Date: Date of the match.
+Team1: Name of the first team participating in the match.
+Team2: Name of the second team participating in the match.
+Venue: Stadium where the match was played.
+Winner: Name of the winning team.
+Total.Runs: Total runs scored in the match.
+Total.Wickets: Total wickets taken in the match.
+Other relevant columns (if any).
+Problem Tasks:
+Task 1: Data Overview and Structure.  Display the structure of the dataset using str() function. Output summary statistics of numerical columns using summary().
+ Task 2: Basic Data Insights. Calculate and display the total number of matches in the dataset. Determine the number of unique teams that have participated in IPL matches. List the unique teams from both Team1 and Team2.
+ Task 3: Team Performance Analysis. Calculate the number of matches won by each team and display the results. Compute the average total runs scored in the matches. Calculate the average total wickets taken in the matches.
+ Task 4: Venue Insights. Identify and display the most frequently used venue for matches.
+ Task 5: Visualization. Create a bar plot to visualize the number of matches won by each team.
+ 
+_______________________________________________________________________________________________________________________________________________________________
+
+# Name - AYUSH ANAND
+# USN - 1MS21CI008
+
+# Load the necessary libraries
+
+library(dplyr)
+library(ggplot2)
+
+# Task 1: Data Overview and Structure
+# Read the dataset IPL.csv into a data frame named ipl_data
+ipl_data <- read_csv("/home/ritadmin/Documents/RLab/data.csv")
+
+# Display the structure of the dataset
+cat("Task 1.1: Data Overview (Structure)\n")
+str(ipl_data)
+
+# Output summary statistics of numerical columns
+cat("\nTask 1.2: Summary Statistics of Numerical Columns\n")
+summary(ipl_data)
+
+# Task 2: Basic Data Insights
+# Calculate and display the total number of matches
+total_matches <- nrow(ipl_data)
+cat("\nTask 2.1: Total Number of Matches\n")
+print(total_matches)
+
+# Determine the number of unique teams
+unique_teams <- union(unique(ipl_data$team1), unique(ipl_data$team2))
+num_unique_teams <- length(unique_teams)
+cat("\nTask 2.2: Number of Unique Teams\n")
+print(num_unique_teams)
+
+# List the unique teams from both Team1 and Team2
+cat("\nTask 2.3: Unique Teams\n")
+print(unique_teams)
+
+# Task 3: Team Performance Analysis
+# Calculate the number of matches won by each team
+matches_won <- table(ipl_data$winner)
+cat("\nTask 3.1: Matches Won by Each Team\n")
+print(matches_won)
+
+# Compute the average win_by_runs and win_by_wickets
+average_runs <- mean(ipl_data$win_by_runs, na.rm = TRUE)
+cat("\nTask 3.2: Average Win by Runs\n")
+print(average_runs)
+
+average_wickets <- mean(ipl_data$win_by_wickets, na.rm = TRUE)
+cat("\nTask 3.3: Average Win by Wickets\n")
+print(average_wickets)
+
+# Task 4: Venue Insights
+# Identify and display the most frequently used venue for matches
+most_frequent_venue <- names(which.max(table(ipl_data$venue)))
+cat("\nTask 4: Most Frequently Used Venue\n")
+print(most_frequent_venue)
+
+# Task 5: Visualization
+# Create a bar plot to visualize the number of matches won by each team
+# (Ignoring potential errors for missing columns)
+matches_won_df <- as.data.frame(matches_won)
+print(matches_won_df)
+
+cat("\nTask 5: Bar Plot - Matches Won by Each Team\n")
+barplt =ggplot(matches_won_df, aes(x = Var1, y = Freq, fill = Var1)) +
+  geom_bar(stat = "identity") +
+  labs(title = "Matches Won by Each Team", x = "Team", y = "Number of Matches Won") +
+  theme_minimal()
+print(barplt)
